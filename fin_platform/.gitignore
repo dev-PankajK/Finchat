@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyz
+*.pyzw
+experiment*
+# Virtual environment
+venv/
+env/
+env_bak/
+ENV/
+env*.txt
+.python-version
+
+# Compiled files
+
+
+# Distribution / packaging
+dist/
+build/
+eggs/
+*.egg-info/
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+Thumbs.db
+Desktop.ini
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# OS generated files
+.DS_Store
+ehthumbs.db
+Icon?
+.env
+
+# Pytest
+htmlcov/
+.coverage
+
+# Jupyter Notebook
+.ipynb_checkpoints/
