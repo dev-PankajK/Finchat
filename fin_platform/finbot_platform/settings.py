@@ -1,6 +1,3 @@
-# Visit https://www.lddgo.net/en/string/pyc-compile-decompile for more information
-# Version : Python 3.11
-
 import os
 from pathlib import Path
 from tempfile import gettempdir
@@ -43,18 +40,19 @@ class Settings(BaseSettings):
     log_level: LOG_LEVEL = 'INFO'
     secret_signing_key: str = 'JF52S66x6WMoifP5gZreiguYs9LYMn0lkXqgPYoNMD0='
     openai_api_base: str = 'https://api.openai.com/v1'
-    openai_api_key: str = os.getenv('OPENAI_API_KEY')
-    print(openai_api_key)
+    openai_api_key: str = "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"
     openai_api_version: str = '2023-08-01-preview'
     azure_openai_deployment_name: str = '<Should be updated via env if using azure>'
     frontend_url: str = 'http://localhost:3000'
     allowed_origins_regex: Optional[str] = None
-    db_host: str = 'localhost'
-    db_port: int = 3308
-    db_user: str = 'reworkd_platform'
-    db_pass: str = 'reworkd_platform'
-    db_base: str = 'reworkd_platform'
-    db_echo: bool = False
+    db_config:dict = {
+        'user': 'root',
+        'password': '',
+        'host': 'localhost',
+        'port': 3306,
+        'database': 'mybank'
+    }
+
     db_ca_path: Optional[str] = None
     pinecone_api_key: Optional[str] = None
     pinecone_index_name: Optional[str] = None

@@ -38,3 +38,4 @@ def get_app() -> FastAPI:
     # app.exception_handler(PlatformaticError)(platformatic_exception_handler)
 
     return app
+

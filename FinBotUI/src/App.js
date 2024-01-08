@@ -1,10 +1,13 @@
 import './App.css';
-// import Teste from './components/testc'
 import Chatbot from './components/chatbot';
+import ChatbotState from './context/chatbot/chatbotState';
 function App() {
   return (
     <>
+    <ChatbotState>
     <Chatbot />
+    </ChatbotState>
+
     </>
   );
 }

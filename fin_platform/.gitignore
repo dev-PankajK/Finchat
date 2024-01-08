@@ -5,6 +5,7 @@ __pycache__/
 *.pyd
 *.pyz
 *.pyzw
+localvdb
 experiment*
 # Virtual environment
 venv/
@@ -13,7 +14,8 @@ env_bak/
 ENV/
 env*.txt
 .python-version
-
+faiss_vectordb
+sql_faiss_vectordb
 # Compiled files
 
 

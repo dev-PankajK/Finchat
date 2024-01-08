@@ -1,0 +1,2 @@
+user_query,sql_query
+What's my current account balance?,SELECT balance FROM users  WHERE user_id = 1

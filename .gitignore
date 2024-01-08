@@ -13,7 +13,8 @@ env_bak/
 ENV/
 env*.txt
 .python-version
-
+faiss_vectordb
+sql_faiss_vectordb
 # Compiled files
 
 

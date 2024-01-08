@@ -1,58 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState, useEffect } from 'react';
 import '../styles/chatbot.css';  
-import { fetchEventSource } from "@microsoft/fetch-event-source";
+import ChatbotContext from '../context/chatbot/chatbotContext';
+import fetchSse from '../utils/chatbot_utils';
 const Chatbot = () => {
-    const [userMessage, setUserMessage] = useState('');
-    const [data, setData] = useState('');
-    const [streaming, setStreaming] = useState(false)
-    const [messages, setMessages] = useState([
-        { type: 'incoming', content: 'Hi There! How can I help you' },
-    ]);
+    const { userMessage, setUserMessage, data, setData, streaming, setStreaming, messages, setMessages } = useContext(ChatbotContext);
     const serverBaseURL = "http://127.0.0.1:8000"
-    const fetchData = async () => {
-        try {
-            const response = await fetchEventSource(`${serverBaseURL}/api/agent/openai_streaming`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: "text/event-stream",
-                },
-                body: JSON.stringify({
-                    message: userMessage
-                }),
-                onopen(res) {
-                    if (res.ok && res.status === 200) {
-                        console.log("Connection made ", res);
-                        setStreaming(true)
-                        setMessages((prevMessages) => [...prevMessages, { type: 'incoming', content: '' }])
-                    } else if (res.status >= 400 && res.status < 500 && res.status !== 429) {
-                        console.log("Client-side error ", res);
-                    }
-                },
-                onmessage(event) {
-                    setData((prevData) => prevData + event.data);
-                },
-                onclose() {
-                    setStreaming(false)
-                    console.log("Connection closed by the server");
-                    setData((prevData) => {
-                        setMessages((prevMessages) => {
-                            prevMessages.pop();
-                            return [...prevMessages, { type: 'incoming', content: prevData }]})
-                        // setMessages((prevMessages) => [...prevMessages, { type: 'incoming', content: prevData }])
-                        return prevData; // Return the value to update the state
-                    });
-                    console.log("Finishing Everythin.....");
-                },
-                onerror(err) {
-                    console.log("There was an error from server", err);
-                },
-            });
-        } catch (error) {
-            console.log("There was an error from the server", error);
-        }
-    };
+    const sseEndpoint = `${serverBaseURL}/api/agent/run`
     useEffect(() => {
         console.log("Current Data Updated:", data);
         console.log(`streaming ${streaming}`);
@@ -75,7 +29,11 @@ const Chatbot = () => {
         //Fetch the data from backend and create the incoming li(streaming li)
         try {
             // Fetch data from the backend
-            await fetchData();
+            const body = JSON.stringify({
+                                query: userMessage,
+                                userId: 1
+                            });
+            await fetchSse(sseEndpoint,body,setData,setMessages,setStreaming);
             setData('');
             setUserMessage('');
         } catch (error) {

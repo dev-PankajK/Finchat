@@ -1,0 +1,11 @@
+query,query_type,agent_type,query_info,answer_template
+What are the foreign transaction fees for my account?,account_info,sql_agent,,
+What's my current account balance?,account_info,sql_agent,SELECT balance FROM users  WHERE user_id = ,Your current balance is {result[0][0]}
+Can you assist me in updating my contact information in real-time?,account_info,get_detail,,
+Provide a detailed summary of my account's annual performance.,account_info,sql_agent,,
+Can you  provide information of transaction of my last month,account_info,sql_agent,,
+How do I set up a new account with ObligeAI?,informative,info_agent,,
+what is the maximum amount I spent this month,account_info,sql_agent,,
+what is the minimum amount I spent this month,account_info,sql_agent,,
+what is the total amount I withdraw this month,account_info,sql_agent,,
+what is the total deposit in this month,account_info,sql_agent,,
