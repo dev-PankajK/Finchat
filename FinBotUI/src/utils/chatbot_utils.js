@@ -11,7 +11,9 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
  * @param {function} setStreaming - The function to update the streaming state in the component's state.
  * @returns {Promise<void>} - A promise that resolves with no value upon successful execution.
  */
+
 const fetchSse = async (endpoint,body,setData,setMessages,setStreaming) => {
+    setMessages((prevMessages) => [...prevMessages, { type: 'incoming', content: '' }])
     try {
         await fetchEventSource(endpoint, {
             method: "POST",
@@ -24,7 +26,7 @@ const fetchSse = async (endpoint,body,setData,setMessages,setStreaming) => {
                 if (res.ok && res.status === 200) {
                     console.log("Connection made ", res);
                     setStreaming(true)
-                    setMessages((prevMessages) => [...prevMessages, { type: 'incoming', content: '' }])
+                    // setMessages((prevMessages) => [...prevMessages, { type: 'incoming', content: '' }])
                 } else if (res.status >= 400 && res.status < 500 && res.status !== 429) {
                     console.log("Client-side error ", res);
                 }

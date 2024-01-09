@@ -1,5 +1,4 @@
 from fastapi.routing import APIRouter
-api_router = APIRouter()
 from starlette.responses import StreamingResponse
 from finbot_platform.web.api.agent.streaming_services import OpenAIStreaming
 from finbot_platform.schemas.agent import StreamingRequest
@@ -51,3 +50,5 @@ async def agents_run(request: MessageRequest) -> StreamingResponse:
         print(f"INFO: ANOTHER AGENT IS RUNNING TO PROCESS YOUR REQUEST....")
         return StreamingResponse(streamClient.stream_generator(await streamClient.streamNow(request.query)),
                                  media_type='text/event-stream')
+
+

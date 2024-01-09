@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import '../styles/chatbot.css';  
 import ChatbotContext from '../context/chatbot/chatbotContext';
 import fetchSse from '../utils/chatbot_utils';
@@ -14,7 +14,6 @@ const Chatbot = () => {
     }, [data, messages]);
 
     const handleInputChange = (event) => {
-        console.log(event.keyCode);
         if (event.keyCode === 13) {
             // If Enter key is pressed, submit the message
             handleChat();

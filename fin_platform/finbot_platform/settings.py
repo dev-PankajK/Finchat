@@ -61,7 +61,9 @@ class Settings(BaseSettings):
     pusher_key: Optional[str] = None
     pusher_secret: Optional[str] = None
     pusher_cluster: Optional[str] = None
-
+    @property
+    def db_url(self) -> str:
+        return f"mysql+mysqlconnector://{self.db_config['user']}:{self.db_config['password']}@{self.db_config['host']}:{self.db_config['port']}/{self.db_config['database']}"
     class Config:
         __qualname__ = 'Settings.Config'
         env_file = '.env'
