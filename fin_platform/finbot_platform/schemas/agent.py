@@ -5,7 +5,7 @@ from pydantic import BaseModel
 class StreamingRequest(BaseModel):
     message: str
 
-class MessageRequest(BaseModel):
+class AgentRun(BaseModel):
     query: str
-    userId: int #TODO CHANGE IT
+    access_token: str #TODO CHANGE IT
 

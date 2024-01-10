@@ -32,6 +32,7 @@ class Settings(BaseSettings):
     These parameters can be configured
     with environment variables.
     '''
+    JWT_SECRET_KEY:str = "ggijgaglkhwoi3o53h5k3hk35bjk3m5hoicd23413"
     host: str = '127.0.0.1'
     port: int = 8000
     workers_count: int = 1
@@ -52,6 +53,7 @@ class Settings(BaseSettings):
         'port': 3306,
         'database': 'mybank'
     }
+    db_echo: bool = False
 
     db_ca_path: Optional[str] = None
     pinecone_api_key: Optional[str] = None

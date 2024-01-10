@@ -18,6 +18,9 @@ tiktoken = "^0.5.2"
 faiss-cpu = "^1.7.4"
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+aiomysql = "^0.2.0"
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.25"}
+asyncmy = "^0.2.9"
 
 
 [tool.poetry.group.dev.dependencies]
