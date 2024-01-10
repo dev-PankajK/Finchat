@@ -27,10 +27,11 @@ const Chatbot = () => {
         setMessages([...messages, { type: 'outgoing', content: trimmedMessage }]);
         //Fetch the data from backend and create the incoming li(streaming li)
         try {
+            console.log(localStorage.access_token);
             // Fetch data from the backend
             const body = JSON.stringify({
                                 query: userMessage,
-                                userId: 1
+                                access_token: localStorage.access_token
                             });
             await fetchSse(sseEndpoint,body,setData,setMessages,setStreaming);
             setData('');
