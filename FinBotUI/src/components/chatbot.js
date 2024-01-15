@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import '../styles/chatbot.css';  
 import ChatbotContext from '../context/chatbot/chatbotContext';
 import fetchSse from '../utils/chatbot_utils';
+
 const Chatbot = () => {
     const { userMessage, setUserMessage, data, setData, streaming, setStreaming, messages, setMessages } = useContext(ChatbotContext);
     const serverBaseURL = "http://127.0.0.1:8000"

@@ -27,7 +27,7 @@ class OpenAIStreaming():
             encoding = tiktoken.get_encoding("cl100k_base")
             token_data = encoding.encode(data)
             for token in token_data:
-                print(encoding.decode([token]))
+                # print(encoding.decode([token]))
                 chunk = "data: " + (encoding.decode([token])) + "\n\n"
                 yield chunk
                 await asyncio.sleep(0.25)  # simulate slow processing

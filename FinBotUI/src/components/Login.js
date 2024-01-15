@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import Chatbot from './chatbot';
-
+import Test from './test';
 const Login = () => {
     const [isLoggedIn,setLoggedIn] = useState(false);
     const [credentials, setCredentials] = useState({username:"",password:""});
@@ -19,8 +19,13 @@ const Login = () => {
         }
     }
     if (isLoggedIn) {
-        return <Chatbot />;
-    }
+        return (
+            <div>
+              <Chatbot />
+              <Test />
+            </div>
+          );
+    };
     const formOnChange = (e)=>{
         setCredentials({...credentials,[e.target.name]:e.target.value})
     }
