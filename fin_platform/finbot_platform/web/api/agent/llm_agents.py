@@ -5,10 +5,10 @@ from langchain.agents.output_parsers import OpenAIFunctionsAgentOutputParser
 from langchain.agents import AgentExecutor
 from finbot_platform.web.api.agent import agent_tools
 from langchain.chat_models import ChatOpenAI
-
+from finbot_platform.settings import settings
 
 def lang_multitool_agent(user_id):
-    llm = ChatOpenAI(model="gpt-3.5-turbo-0613", temperature=0)
+    llm = ChatOpenAI(model="gpt-3.5-turbo-0613", temperature=0,api_key=settings.openai_api_key)
     tools = [agent_tools.sql_agent,agent_tools.info_agent,agent_tools.data_saver]
     prompt = ChatPromptTemplate.from_messages(
         [

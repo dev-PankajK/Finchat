@@ -33,7 +33,7 @@ class Settings(BaseSettings):
     with environment variables.
     '''
     JWT_SECRET_KEY:str = "ggijgaglkhwoi3o53h5k3hk35bjk3m5hoicd23413"
-    host: str = '127.0.0.1'
+    host: str = '0.0.0.0'
     port: int = 8000
     workers_count: int = 1
     reload: bool = True

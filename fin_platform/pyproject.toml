@@ -1,9 +1,12 @@
 [tool.poetry]
-name = "fin-platform"
+name = "finbot_platform"
 version = "0.1.0"
 description = ""
 authors = ["KBI"]
 readme = "README.md"
+
+[tool.poetry.scripts]
+start = "finbot_platform.__main__:main"
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -21,6 +24,8 @@ passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 aiomysql = "^0.2.0"
 sqlalchemy = {extras = ["asyncio"], version = "^2.0.25"}
 asyncmy = "^0.2.9"
+uvicorn = "^0.25.0"
+async-timeout = "^4.0.3"
 
 
 [tool.poetry.group.dev.dependencies]
