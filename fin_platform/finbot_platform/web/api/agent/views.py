@@ -9,10 +9,12 @@ from .vector_util import VectorSupport
 from fastapi import Depends,Request,Body
 from typing import Annotated
 from finbot_platform.web.api.agent.dependencies import get_user_message,get_current_user
+from finbot_platform.web.api.agent.llm_agents import lang_multitool_agent
 import time
 router = APIRouter()
 streamClient = OpenAIStreaming()
 vdb = VectorSupport()
+LANG_AGENT = lang_multitool_agent(1)
 @router.get(
     "/test")
 async def test():
@@ -56,3 +58,11 @@ async def agents_run(current_user: Annotated[User, Depends(get_current_user)],us
                                  media_type='text/event-stream')
 
 
+
+@router.post(
+    "/lang_multiool_agent",
+)
+async def langMultiToolAgent(userMessage:StreamingRequest) -> StreamingResponse:
+    response = LANG_AGENT.invoke({"input": userMessage})
+    return StreamingResponse(streamClient.stream_string(response['output']),
+                                 media_type='text/event-stream')
