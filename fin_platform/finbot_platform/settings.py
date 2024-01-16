@@ -3,6 +3,7 @@ from pathlib import Path
 from tempfile import gettempdir
 from typing import List, Literal, Optional, Union
 from pydantic_settings import BaseSettings
+
 TEMP_DIR = Path(gettempdir())
 LOG_LEVEL = Literal[
     "NOTSET",
@@ -32,7 +33,7 @@ class Settings(BaseSettings):
     These parameters can be configured
     with environment variables.
     '''
-    JWT_SECRET_KEY:str = "ggijgaglkhwoi3o53h5k3hk35bjk3m5hoicd23413"
+    JWT_SECRET_KEY:str = os.getenv("JWT_SECRET_KEY")
     host: str = '0.0.0.0'
     port: int = 8000
     workers_count: int = 1
@@ -41,17 +42,17 @@ class Settings(BaseSettings):
     log_level: LOG_LEVEL = 'INFO'
     secret_signing_key: str = 'JF52S66x6WMoifP5gZreiguYs9LYMn0lkXqgPYoNMD0='
     openai_api_base: str = 'https://api.openai.com/v1'
-    openai_api_key: str = "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"
+    openai_api_key: str = os.getenv("OPENAI_API_KEY")
     openai_api_version: str = '2023-08-01-preview'
     azure_openai_deployment_name: str = '<Should be updated via env if using azure>'
-    frontend_url: str = 'http://localhost:3000'
+    frontend_url: str = os.getenv('FRONTEND_URL')
     allowed_origins_regex: Optional[str] = None
     db_config:dict = {
-        'user': 'root',
-        'password': '',
-        'host': 'localhost',
-        'port': 3306,
-        'database': 'mybank'
+        'user': os.getenv('FIN_PLATFORM_DB_USER'),
+        'password': os.getenv('FIN_PLATFORM_DB_PASS'),
+        'host': os.getenv('FIN_PLATFORM_DB_HOST'),
+        'port': int(os.getenv('FIN_PLATFORM_DB_PORT')),
+        'database': os.getenv('FIN_PLATFORM_DATABASE')
     }
     db_echo: bool = False
 

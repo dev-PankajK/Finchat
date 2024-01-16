@@ -18,6 +18,7 @@ LANG_AGENT = lang_multitool_agent(1)
 @router.get(
     "/test")
 async def test():
+    print(settings.db_config)
     return "Hello"
 @router.post(
     "/openai_streaming",

@@ -26,6 +26,7 @@ sqlalchemy = {extras = ["asyncio"], version = "^2.0.25"}
 asyncmy = "^0.2.9"
 uvicorn = "^0.25.0"
 async-timeout = "^4.0.3"
+ujson = "^5.9.0"
 
 
 [tool.poetry.group.dev.dependencies]

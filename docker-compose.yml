@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  platform:
+    container_name: finbot_platform
+    build:
+      context: ./fin_platform
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./fin_platform:/app/src/
+    env_file:
+      - .env
+    environment:
+      FIN_PLATFORM_HOST: 0.0.0.0
+      FIN_PLATFORM_DB_HOST: "localhost"
+      FIN_PLATFORM_DB_PORT: "3306"
+      FIN_PLATFORM_DB_USER: "fin_platform"
+      FIN_PLATFORM_DB_PASS: "fin_platform"
+      FIN_PLATFORM_DATABASE: "mybank"
+    depends_on:
+      - finbot_db
+
+  finbot_db:
+    image: mysql:8.0
+    container_name: finbot_db
+    build:
+      context: ./db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: "mybank"
+      MYSQL_USER: "fin_platform"
+      MYSQL_PASSWORD: "fin_platform"
+      MYSQL_ROOT_PASSWORD: "fin_platform"
+      MYSQL_TCP_PORT: 3306
+#    volumes:
+#      - agentgpt_db:/var/lib/mysql
+    command: [ 'mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
+
+#volumes:
+#  agentgpt_db:

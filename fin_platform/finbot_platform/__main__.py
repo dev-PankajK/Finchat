@@ -1,4 +1,9 @@
 import uvicorn
+try:
+    from dotenv import load_dotenv
+    load_dotenv(override=True)
+except Exception as e:
+    print(e)
 from finbot_platform.settings import settings
 def main() -> None:
     """Entrypoint of the application."""
