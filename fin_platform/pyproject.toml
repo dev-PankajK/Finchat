@@ -7,7 +7,6 @@ readme = "README.md"
 
 [tool.poetry.scripts]
 start = "finbot_platform.__main__:main"
-tests = "pytest finbot_platform/tests/"
 
 [tool.poetry.dependencies]
 python = "^3.11"

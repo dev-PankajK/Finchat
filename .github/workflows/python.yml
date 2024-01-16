@@ -38,11 +38,9 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: 'poetry'
       - run: poetry install
-      - name: Run Pytests
-        run: poetry run pytest finbot_platform/tests/
-      - name: Check pytest result and prevent further pushes
-        if: ${{ failure() }}
-        run: echo "Tests failed. Please fix the issues before pushing further changes." && exit 1
         env:
           FIN_PLATFORM_HOST: "0.0.0.0"
           FIN_PLATFORM_DB_HOST: localhost
+      - name: Run Pytests
+        run: poetry run pytest finbot_platform/tests/
+
