@@ -14,6 +14,21 @@ jobs:
     defaults:
       run:
         working-directory: fin_platform
+    services:
+      fin_platform-db:
+        image: bitnami/mysql:8.0.30
+        env:
+          MYSQL_ROOT_PASSWORD: "fin_platform"
+          MYSQL_ROOT_USER: "fin_platform"
+          MYSQL_DATABASE: "fin_platform"
+          MYSQL_AUTHENTICATION_PLUGIN: "mysql_native_password"
+        options: >-
+          --health-cmd="mysqladmin ping -u root"
+          --health-interval=15s
+          --health-timeout=5s
+          --health-retries=6
+        ports:
+          - 3306:3306
     steps:
       - uses: actions/checkout@v3
       - name: Install poetry
@@ -28,3 +43,6 @@ jobs:
       - name: Check pytest result and prevent further pushes
         if: ${{ failure() }}
         run: echo "Tests failed. Please fix the issues before pushing further changes." && exit 1
+        env:
+          FIN_PLATFORM_HOST: "0.0.0.0"
+          FIN_PLATFORM_DB_HOST: localhost
