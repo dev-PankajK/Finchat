@@ -3,7 +3,7 @@ name: Backend Tests
 on:
   push:
     branches:
-      - test
+      - test1
 
 env:
   PYTHON_VERSION: "3.11"
@@ -24,7 +24,7 @@ jobs:
           cache: 'poetry'
       - run: poetry install
       - name: Run Pytests
-        run: poetry run pytest
+        run: poetry run pytest finbot_platform/tests/
       - name: Check pytest result and prevent further pushes
         if: ${{ failure() }}
         run: echo "Tests failed. Please fix the issues before pushing further changes." && exit 1

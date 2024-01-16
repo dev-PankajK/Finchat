@@ -9,7 +9,8 @@ class Connection:
         print(model_instance)
         self.session.add(model_instance)
         self.session.commit()
-        return self.session.refresh(model_instance)
+        self.session.refresh(model_instance)
+        return model_instance
     def fetch(self,sql_st):
         return self.session.exec(sql_st)
     def __enter__(self):
