@@ -1,0 +1,25 @@
+name: Backend Tests
+
+on:
+  push:
+    branches:
+      - test
+env:
+  PYTHON_VERSION: "3.11"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: fin_platform
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install poetry
+        run: pipx install poetry
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'poetry'
+      - run: poetry install
+      - name: Run Pytests
+        run: poetry run pytest
