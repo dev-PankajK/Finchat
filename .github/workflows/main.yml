@@ -4,8 +4,10 @@ on:
   push:
     branches:
       - test
+
 env:
   PYTHON_VERSION: "3.11"
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -23,3 +25,6 @@ jobs:
       - run: poetry install
       - name: Run Pytests
         run: poetry run pytest
+      - name: Check pytest result and prevent further pushes
+        if: ${{ failure() }}
+        run: echo "Tests failed. Please fix the issues before pushing further changes." && exit 1
