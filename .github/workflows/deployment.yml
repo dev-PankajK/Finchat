@@ -36,6 +36,10 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+    - name: Show working directory and list contents
+      run: |
+        pwd
+        ls -R
 
 #    - name: Build docker image
 #      run: |
