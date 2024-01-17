@@ -3,7 +3,7 @@ name: Backend Tests
 on:
   push:
     branches:
-      - test1
+      - test2
 
 env:
   PYTHON_VERSION: "3.11"
