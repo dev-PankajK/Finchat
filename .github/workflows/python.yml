@@ -7,6 +7,14 @@ on:
 
 env:
   PYTHON_VERSION: "3.11"
+  FIN_PLATFORM_DB_USER: "fin_platform"
+  FIN_PLATFORM_DB_HOST: "0.0.0.0"
+  FIN_PLATFORM_DB_PORT: "3306"
+  FIN_PLATFORM_DB_PASS: "fin_platform"
+  FIN_PLATFORM_DATABASE: "mybank"
+  OPENAI_API_KEY: ${{secrets.OPENAI_API_KEY}}
+  JWT_SECRET_KEY: ${{secrets.JWT_SECRET_KEY}}
+  FRONTEND_URL: ${{vars.FRONTEND_URL}}
 
 jobs:
   test:
@@ -20,7 +28,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: "fin_platform"
           MYSQL_ROOT_USER: "fin_platform"
-          MYSQL_DATABASE: "fin_platform"
+          MYSQL_DATABASE: "mybank"
           MYSQL_AUTHENTICATION_PLUGIN: "mysql_native_password"
         options: >-
           --health-cmd="mysqladmin ping -u root"
@@ -38,13 +46,5 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: 'poetry'
       - run: poetry install
-      - name: Read s variable
-        run: echo "My openai key ${{secrets.OPENAI_API_KEY}}"
-        env:
-          FIN_PLATFORM_DB_USER: "fin_platform"
-          FIN_PLATFORM_DB_HOST: "0.0.0.0"
-          FIN_PLATFORM_DB_PORT: "3306"
-          FIN_PLATFORM_DB_PASS: "fin_platform"
       - name: Run Pytests
         run: poetry run pytest finbot_platform/tests/
-
