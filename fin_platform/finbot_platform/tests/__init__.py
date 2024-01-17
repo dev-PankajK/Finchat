@@ -1,6 +1,6 @@
 # "All the unit tests goes heres"
-from dotenv import load_dotenv
-load_dotenv(override=True)
+# from dotenv import load_dotenv
+# load_dotenv(override=True)
 from finbot_platform.db.models import load_all_models
 from finbot_platform.db.connection import Connection
 from finbot_platform.settings import settings
