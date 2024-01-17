@@ -11,6 +11,9 @@ env:
   FIN_PLATFORM_DB_HOST: "0.0.0.0"
   FIN_PLATFORM_DB_PORT: "3306"
   FIN_PLATFORM_DB_PASS: "fin_platform"
+  OPENAI_API_KEY: ${{secrets.OPENAI_API_KEY}}
+  JWT_SECRET_KEY: ${{secrets.JWT_SECRET_KEY}}
+  FRONTEND_URL: ${{vars.FRONTEND_URL}}
 
 jobs:
   test:
@@ -42,10 +45,6 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: 'poetry'
       - run: poetry install
-      - name: Read s variable
-        run: echo "My openai key ${{secrets.OPENAI_API_KEY}}"
-      - name: Read s variable
-        run: echo "My openai key ${{vars.FRONTEND_URL}}"
       - name: Run Pytests
         run: poetry run pytest finbot_platform/tests/
 
