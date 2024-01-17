@@ -4,6 +4,7 @@ from finbot_platform.db.models.user import User
 
 
 
+
 test_user = {
     "username": "abc.cdf@gmail.com",
     "password": "test123"
