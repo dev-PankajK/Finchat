@@ -1,5 +1,3 @@
-from dotenv import load_dotenv
-load_dotenv(override=True)
 from finbot_platform.db.crud.user import create_user
 from finbot_platform.schemas.auth import CreateUserRequest
 from finbot_platform.db.models.user import User
