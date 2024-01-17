@@ -16,5 +16,6 @@ with Connection(settings.db_url) as db:
             load_all_models()
             SQLModel.metadata.create_all(db.engine)
             print(f"INFO: Successfully created all the tables.")
+            connection.close()
         else:
             print(f"INFO:Database with all the tables already exists.Skipping...")
