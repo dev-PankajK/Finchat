@@ -9,8 +9,7 @@ test_user = {
     "password": "test123"
 }
 
-def test_create_a_user(_engine):
-    assert _engine["test"] == "ok"
+def test_create_a_user():
     create_test_user = CreateUserRequest(**test_user)
     user = create_user(create_test_user)
     assert isinstance(user,User)
