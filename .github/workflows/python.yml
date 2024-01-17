@@ -28,7 +28,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: "fin_platform"
           MYSQL_ROOT_USER: "fin_platform"
-          MYSQL_DATABASE: "fin_platform"
+          MYSQL_DATABASE: "mybank"
           MYSQL_AUTHENTICATION_PLUGIN: "mysql_native_password"
         options: >-
           --health-cmd="mysqladmin ping -u root"
