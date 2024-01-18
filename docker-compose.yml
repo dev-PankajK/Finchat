@@ -1,6 +1,7 @@
 version: '3.9'
 
 
+
 services:
   platform:
     container_name: finbot_platform
