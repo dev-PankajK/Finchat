@@ -6,6 +6,7 @@ on:
       - deployment
 
 
+
 env:
   PYTHON_VERSION: "3.11"
   FIN_PLATFORM_DB_USER: "fin_platform"
