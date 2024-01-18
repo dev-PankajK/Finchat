@@ -1,0 +1,28 @@
+name: Deploy to AWS EC2
+
+on:
+  push:
+    branches:
+      - deployment
+
+env:
+  PYTHON_VERSION: "3.11"
+  FIN_PLATFORM_DB_USER: "fin_platform"
+  FIN_PLATFORM_DB_HOST: "0.0.0.0"
+  FIN_PLATFORM_DB_PORT: "3306"
+  FIN_PLATFORM_DB_PASS: "fin_platform"
+  FIN_PLATFORM_DATABASE: "mybank"
+  OPENAI_API_KEY: ${{secrets.OPENAI_API_KEY}}
+  JWT_SECRET_KEY: ${{secrets.JWT_SECRET_KEY}}
+  FRONTEND_URL: ${{vars.FRONTEND_URL}}
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy using Docker Compose
+        run: |
+          docker-compose up -d
