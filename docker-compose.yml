@@ -9,8 +9,6 @@ services:
       - "8000:8000"
     volumes:
       - ./fin_platform:/app/src/
-    env_file:
-      - .env
     environment:
       FIN_PLATFORM_HOST: 0.0.0.0
       FIN_PLATFORM_DB_HOST: "localhost"
