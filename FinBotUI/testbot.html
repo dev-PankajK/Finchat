@@ -1,17 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <script type="text/javascript">
-        if (!Array.isArray(window.qbOptions)) {
-          window.qbOptions = []
-        }
-        window.qbOptions.push({"baseUrl":"https://botsrv2.com","use":"Nog0YE5qqGEpWJwX/LwpXzmxdJ8mkPQlj"});
-      </script>
-      <script type="text/javascript" src="https://static.botsrv2.com/website/js/widget2.d3c671b5.min.js" integrity="sha384-6CxkTBg5kSXeV32vV/ZHN2qhN/ZahVpIjp+B5gaT+wY+e1qP+g7wUmkziIQ50Jd7" crossorigin="anonymous" defer data-no-minify="1" data-cfasync="false"></script>
-</body>
+<html>
+  <head>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+      body, #map {
+        height: 90vh;
+        width: 90vw;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="map"></div>
+
+    <script>
+      let zoom = 15;
+      var url = 'https://tiles.regrid.com'
+      mapboxgl.accessToken = 'pk.eyJ1IjoibmlsZXNoOTkzIiwiYSI6ImNscmthNjlwMDAzNncyaW4xb3A0OXN4MzAifQ.wx4uGKjg3ZMp4Cg11qD0Qw'; // Insert your Mapbox token here
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v9',
+        zoom: zoom,
+        center: [32.776371, 8.21585],
+        showTileBoundaries: true
+      });
+      map.showTileBoundaries = true;
+
+      map.on('load', function () {
+        // Create a parcel layer
+        var parcelCreate = $.ajax({
+          url: url + '/api/v1/parcels?format=mvt&token=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWdyaWQuY29tIiwiaWF0IjoxNzA1NTc2MzU1LCJleHAiOjE3MDgxNjgzNTUsInUiOjM3MTE0MCwiZyI6MjMxNTMsImNhcCI6InBhOnRzOnBzOmJmOm1hOnR5OmVvOnNiIn0.ux9SDPpXRdWUEug8_dcDZajT7Mbx7vQfWL2OySuJPCA',
+          type: 'GET',
+          contentType: 'application/json',
+          dataType: 'json'
+        });
+        parcelCreate.fail(function(jqXHR, textStatus, errorThrown) {
+          console.log('Error getting parcel layer', jqXHR, textStatus, errorThrown);
+        });
+
+        $.when(parcelCreate).then(setup);
+
+        function setup(layerData) {
+          var data = layerData;
+          console.log('Got parcel layer', layerData);
+
+          // Register the parcel source using the tile URL we just got
+          map.addSource(data.id, {
+            type: 'vector',
+            tiles: data.tiles
+          });
+
+          // Add basic parcel outlines
+          map.addLayer({
+            'id': 'parcels',
+            'type': 'line',
+            'source': data.id,
+            'source-layer': data.id,
+            'minzoom': 13,
+            'maxzoom': 20,
+            layout: {
+              visibility: 'visible'
+            },
+            'paint': {
+              'line-color': '#649d8d'
+            }
+          });
+        };
+      });
+      document.write("<p>" + "ZOOM:" + zoom + "</p>");
+    </script>
+  </body>
 </html>
